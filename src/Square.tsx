@@ -1,6 +1,6 @@
 /** @format */
 
-import { SquareType } from './Board';
+import { SquareType } from './Game';
 
 // Props の型を定義する
 type SquareProps = {

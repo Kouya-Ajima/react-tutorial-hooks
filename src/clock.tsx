@@ -1,44 +1,23 @@
 /** @format */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type clockState = {
-    date: Date;
-};
+export default function Clock() {
+    const [date, newDate] = useState(new Date());
 
-class Clock extends React.Component<{}, clockState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            date: new Date(),
-        };
-    }
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            // 変わるたびにEffectのクリーンアップとセットアップが繰り返されることを防止
+            //  -> Effectは依存する必要がなくなりました。
+            newDate(new Date());
+        }, 1000);
+        // 関数を実行
+        return () => clearInterval(intervalId);
+    }, []);
 
-    componentDidMount(): void {
-        setInterval(() => this.tick(), 1000);
-        // this.timerID = setInterval(() => this.tick(), 1000);
-    }
-
-    componentWillUnmount(): void {
-        // clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            date: new Date(),
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Welcom tic-tac-toe-ts!</h1>
-                <h2>
-                    It is
-                    {this.state.date.toLocaleString()}
-                </h2>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <h1>Welcom tic-tac-toe-ts!</h1>
+            <h2>{'It is ' + date}</h2>
+        </div>
+    );
 }
-
-export default Clock;

@@ -1,19 +1,20 @@
 /** @format */
 import Square from './Square';
 import { useState } from 'react';
-import calculateWinner from './calculateWinner';
-
-export type SquareType = 'O' | 'X' | null;
+import { SquareType } from './Game';
+import { calculateWinner } from './CalculateWinner';
 
 export default function Board() {
     /**
      * useState
      *  -> Squareの現在の値をstateに保存し、Squareがクリックされたときにそれを変更する
      */
+    // 配列を初期化
+    const squareDefault: SquareType[] = Array(9).fill(null);
     // OX の配列 squares に初期値を代入、＆ 関数を宣言
-    const [squares, setSquares] = useState<SquareType[]>(Array(9).fill(null));
+    const [squares, setSquares] = useState(squareDefault);
     // OX を反転 xIsNext に初期値を代入、＆ 関数を宣言
-    const [xIsNext, setXIsNext] = useState<boolean>(true);
+    const [xIsNext, setXIsNext] = useState(true);
 
     /** click Buton -> writing 'X'  */
     function handleClick(i: number) {

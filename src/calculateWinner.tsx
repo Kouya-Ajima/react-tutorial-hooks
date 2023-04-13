@@ -1,9 +1,9 @@
 /** @format */
 
-import { SquareType } from './Board';
+import { SquareType } from './Game';
 
 /** Winner を返す。 決着がついていなければNull を返す */
-export default function calculateWinner(squares: SquareType[]) {
+export function calculateWinner(squares: SquareType[]) {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
