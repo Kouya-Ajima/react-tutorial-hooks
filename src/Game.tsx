@@ -1,7 +1,7 @@
 /** @format */
 import { useState } from 'react';
 import Board from './Board';
-import Clock from './clock';
+import Clock from './Clock';
 
 export type SquareType = 'O' | 'X' | null;
 /** Squares 配列 の配列。 History ＝ [Squares, Squares, Squares] */
