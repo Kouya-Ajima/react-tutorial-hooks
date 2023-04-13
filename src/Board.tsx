@@ -1,7 +1,7 @@
 /** @format */
 import Square from './Square';
 import { SquareType } from './Game';
-import { calculateWinner } from './calculateWinner';
+import { calculateWinner } from './CalculateWinner';
 
 type BoardProps = {
     xIsNext: boolean;
