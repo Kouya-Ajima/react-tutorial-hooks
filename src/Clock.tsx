@@ -1,5 +1,5 @@
 /** @format */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Clock() {
     const [date, newDate] = useState(new Date());
