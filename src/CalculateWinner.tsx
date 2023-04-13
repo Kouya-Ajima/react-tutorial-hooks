@@ -4,7 +4,6 @@ import { SquareType } from './Game';
 
 /** Winner を返す。 決着がついていなければNull を返す */
 export function calculateWinner(squares: SquareType[]) {
-    // if (squares === null) return null;
     const lines = [
         [0, 1, 2],
         [3, 4, 5],

@@ -5,16 +5,18 @@ import { calculateWinner } from './calculateWinner';
 
 type BoardProps = {
     xIsNext: boolean;
-    squares: Array<SquareType>;
+    squares: SquareType[];
     // TS では、引数にも型をつける。
-    onPlay: (nextSquares: Array<SquareType>) => void;
+    onPlay: (nextSquares: SquareType[]) => void;
 };
 
 export default function Board(props: BoardProps) {
     /** click Buton -> writing 'X'  */
     function handleClick(i: number) {
         // 配列の初期値はNull → 値があれば Return する。
-        if (calculateWinner(props.squares) || props.squares[i]) return;
+        if (calculateWinner(props.squares) || props.squares[i]) {
+            return;
+        }
         // 配列をコピー → OX の配列が格納されている。
         const nextSquares = props.squares.slice();
         // 取得した配列の０番目を変更 → 新たなOX を配列に記入する

@@ -5,7 +5,7 @@ import Clock from './clock';
 
 export type SquareType = 'O' | 'X' | null;
 /** Squares 配列 の配列。 History ＝ [Squares, Squares, Squares] */
-type HistoryType = Array<SquareType>;
+type HistoryType = SquareType[];
 
 /**
  * @notice
@@ -17,35 +17,25 @@ type HistoryType = Array<SquareType>;
  */
 export default function Game() {
     // 配列を初期化
-    const historyDefault: Array<HistoryType> = Array(9).fill([
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-    ]);
+    const historyDefault: HistoryType[] = Array(9).fill([null]);
     // Sqares の配列 history に初期値を代入、＆ 関数を宣言
-    const [history, setHistory] = useState<Array<HistoryType>>(historyDefault);
+    const [history, setHistory] = useState<HistoryType[]>(historyDefault);
     // 現在、何手目かを表示する ->初期値 ０
     const [currentMove, setCurrentMove] = useState(0);
-    // 現在の履歴を取得する。 → 最終手ではなく、現時点での手までの履歴を格納する。
-    const currentSquares = history[currentMove];
     // currentMove が更新され、偶数なら X（True）、奇数なら O（False）
     const xIsNext = currentMove % 2 === 0;
+    // 現在の履歴を取得する。 → 最終手ではなく、現時点での手までの履歴を格納する。
+    const currentSquares = history[currentMove];
 
     /** ボタン押下後、履歴を更新して OX をトグル */
-    function handlePlay(nextSquares: Array<SquareType>) {
+    function handlePlay(nextSquares: SquareType[]) {
         // currentMove + 1 -> 今の手順。→ Slice は、最後のインデックスが含まれないため ＋1
         //   → それに対して、NextSquares をプラスする。
         const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
         // history の全履歴 ＋ 新しい履歴（Board から渡されたもの）
         setHistory(nextHistory);
-        // 現在の手を更新 → 全履歴の、その次の手が現在の手になるように更新する
-        setCurrentMove(nextHistory.length + 1);
+        // 現在の手を更新 → 更新された全履歴の最後の手になるように更新する
+        setCurrentMove(nextHistory.length - 1);
     }
 
     // 履歴を更新する → 指定のインデックスまでの配列に置き換える。
