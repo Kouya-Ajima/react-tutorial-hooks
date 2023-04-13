@@ -1,13 +1,13 @@
 /** @format */
 import Square from './Square';
 import { SquareType } from './Game';
-import { calculateWinner } from './CalculateWinner';
+import { calculateWinner } from './calculateWinner';
 
 type BoardProps = {
     xIsNext: boolean;
-    squares: SquareType[];
+    squares: Array<SquareType>;
     // TS では、引数にも型をつける。
-    onPlay: (nextSquares: SquareType[]) => void;
+    onPlay: (nextSquares: Array<SquareType>) => void;
 };
 
 export default function Board(props: BoardProps) {

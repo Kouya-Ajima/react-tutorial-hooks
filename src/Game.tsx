@@ -1,11 +1,11 @@
 /** @format */
 import { useState } from 'react';
 import Board from './Board';
-import Clock from './Clock';
+import Clock from './clock';
 
 export type SquareType = 'O' | 'X' | null;
 /** Squares 配列 の配列。 History ＝ [Squares, Squares, Squares] */
-type HistoryType = SquareType[];
+type HistoryType = Array<SquareType>;
 
 /**
  * @notice
@@ -17,16 +17,25 @@ type HistoryType = SquareType[];
  */
 export default function Game() {
     // 配列を初期化
-    const historyDefault: HistoryType[] = Array(9).fill(null);
+    const historyDefault: Array<HistoryType> = Array(9).fill([
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
     // OX を反転 xIsNext に初期値を代入、＆ 関数を宣言
     const [xIsNext, setXIsNext] = useState<boolean>(true);
     // Sqares の配列 history に初期値を代入、＆ 関数を宣言
-    const [history, setHistory] = useState<HistoryType[]>(historyDefault);
+    const [history, setHistory] = useState<Array<HistoryType>>(historyDefault);
     // 現在の履歴を取得する。 → 配列が0から始まるので、履歴の長さ −１
     const currentSquares = history[history.length - 1];
-
     /** ボタン押下後、履歴を更新して OX をトグル */
-    function handlePlay(nextSquares: SquareType[]) {
+    function handlePlay(nextSquares: Array<SquareType>) {
         // history の全履歴 ＋ 新しい履歴（Board から渡されたもの）
         setHistory([...history, nextSquares]);
         // O X を トグル
